@@ -21,6 +21,7 @@ import {
   CreatorTopicSummaryBackendDict,
 } from 'domain/topic/creator-topic-summary.model';
 import {ImageData} from 'pages/classroom-admin-page/existing-classroom.model';
+import {CertificateOfferingBackendDict} from 'domain/classroom/classroom-backend-api.service';
 
 export class ClassroomData {
   _classroom_id: string;
@@ -35,7 +36,7 @@ export class ClassroomData {
   _thumbnailData: ImageData;
   _bannerData: ImageData;
   _publicClassroomsCount: number;
-  _certificates: any[];
+  _certificates: CertificateOfferingBackendDict[];
 
   constructor(
     classroomId: string,
@@ -50,7 +51,7 @@ export class ClassroomData {
     thumbnailData: ImageData,
     bannerData: ImageData,
     publicClassroomsCount: number,
-    certificates: any[]
+    certificates: CertificateOfferingBackendDict[]
   ) {
     this._classroom_id = classroomId;
     this._name = name;
@@ -80,7 +81,7 @@ export class ClassroomData {
     thumbnailData: ImageData,
     bannerData: ImageData,
     publicClassroomsCount: number,
-    certificates: any[]
+    certificates: CertificateOfferingBackendDict[]
   ): ClassroomData {
     let topicSummaries = topicSummaryDicts.map(summaryDict => {
       return CreatorTopicSummary.createFromBackendDict(summaryDict);
@@ -150,7 +151,7 @@ export class ClassroomData {
     return this._classroom_id;
   }
 
-  getCertificates(): any[] {
+  getCertificates(): CertificateOfferingBackendDict[] {
     return this._certificates;
   }
 }

@@ -21,12 +21,22 @@ from __future__ import annotations
 import datetime
 
 from core import utils
+from core.domain import question_domain
 
-# Here we use type Any because the to_dict method returns a dictionary
-# that maps string keys to various types of values (str, int, float,
-# bool, None) depending on the field, and there is no single specific
-# type that can represent all of these.
-from typing import Any, Dict, Optional
+from typing import Optional, TypedDict
+
+
+class AssessmentAttemptDict(TypedDict):
+    """Dict representation of an assessment attempt."""
+
+    id: str
+    user_id: str
+    offering_id: str
+    offering_version: int
+    start_time: float
+    end_time: Optional[float]
+    score_percentage: Optional[float]
+    passed: bool
 
 
 class AssessmentAttempt:
@@ -82,7 +92,7 @@ class AssessmentAttempt:
                     'Score percentage must be between 0 and 100'
                 )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> AssessmentAttemptDict:
         """Returns a dict representation of the attempt."""
         return {
             'id': self.id,
@@ -99,6 +109,27 @@ class AssessmentAttempt:
             'score_percentage': self.score_percentage,
             'offering_name': self.offering_name,
         }
+
+
+class QuestionWithMetadataDict(question_domain.QuestionDict):
+    """Dict representation of a question with skill metadata."""
+
+    skill_id: str
+    skill_difficulty: float
+
+
+class AssessmentResponseDict(TypedDict):
+    """Dict representation of an assessment response."""
+
+    id: str
+    attempt_id: str
+    user_id: str
+    question_id: str
+    question_version: int
+    skill_id: str
+    skill_version: int
+    learner_answer_html: Optional[str]
+    is_correct: bool
 
 
 class AssessmentQuestionResponse:
@@ -149,7 +180,7 @@ class AssessmentQuestionResponse:
         if not isinstance(self.is_correct, bool):
             raise utils.ValidationError('is_correct must be a boolean')
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> AssessmentResponseDict:
         """Returns a dict representation of the response."""
         return {
             'id': self.id,

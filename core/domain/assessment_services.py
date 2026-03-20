@@ -35,7 +35,7 @@ from core.platform import models
 # Here we use type Any because the function returns a list of
 # dictionaries that contain mixed types of values (question dicts,
 # skill IDs, and difficulty floats).
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 
 MYPY = False
 if MYPY:  # pragma: no cover
@@ -102,7 +102,7 @@ def get_assessment_attempt_by_id(
 
 def fetch_questions_for_certificate(
     offering_id: str,
-) -> List[Dict[str, Any]]:
+) -> List[assessment_domain.QuestionWithMetadataDict]:
     """Retrieves precisely balanced questions for a given certificate
     offering.
 
@@ -241,8 +241,7 @@ def get_earned_certificates(
     """Returns all successful assessment attempts for a user."""
     attempt_models = assessment_models.AssessmentAttemptModel.query(
         assessment_models.AssessmentAttemptModel.user_id == user_id,
-        assessment_models.AssessmentAttemptModel.passed
-        == True,  # pylint: disable=singleton-comparison
+        assessment_models.AssessmentAttemptModel.passed,
     ).fetch()
     certificates = []
     for model in attempt_models:

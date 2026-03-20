@@ -25,6 +25,16 @@ import {CreatorTopicSummaryBackendDict} from 'domain/topic/creator-topic-summary
 import {UrlInterpolationService} from 'domain/utilities/url-interpolation.service';
 import {ImageData} from 'pages/classroom-admin-page/existing-classroom.model';
 
+export interface CertificateOfferingBackendDict {
+  id: string;
+  name: string;
+  description: string;
+  classroom_id: string;
+  attached_skill_ids: string[];
+  time_limit_in_minutes: number;
+  version: number;
+}
+
 export interface ClassroomDataBackendDict {
   classroom_id: string;
   name: string;
@@ -38,7 +48,7 @@ export interface ClassroomDataBackendDict {
   thumbnail_data: ImageData;
   banner_data: ImageData;
   public_classrooms_count: number;
-  certificates: any[];
+  certificates: CertificateOfferingBackendDict[];
 }
 
 export interface classroomDisplayInfo {

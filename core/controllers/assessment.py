@@ -32,7 +32,7 @@ from typing import Dict
 class AssessmentAttemptHandler(
     base.BaseHandler[Dict[str, str], Dict[str, str]]
 ):
-    """Handler for starting an assessment attempt"""
+    """Handler for starting an assessment attempt."""
 
     GET_HANDLER_ERROR_RETURN_TYPE = feconf.HANDLER_TYPE_JSON
     URL_PATH_ARGS_SCHEMAS: Dict[str, str] = {}
@@ -45,7 +45,7 @@ class AssessmentAttemptHandler(
         """Handles POST requests to start an assessment attempt."""
         offering_id = self.normalized_payload.get('offering_id')
 
-        # Verify offering exists
+        # Verify that the offering exists.
         offering = (
             certificate_services.get_certificate_assessment_offering_by_id(
                 offering_id, strict=False
@@ -65,7 +65,7 @@ class AssessmentAttemptHandler(
 
 
 class AssessmentSubmitHandler(base.BaseHandler[Dict[str, str], Dict[str, str]]):
-    """Handler for submitting an assessment attempt"""
+    """Handler for submitting an assessment attempt."""
 
     GET_HANDLER_ERROR_RETURN_TYPE = feconf.HANDLER_TYPE_JSON
     URL_PATH_ARGS_SCHEMAS: Dict[str, str] = {}
@@ -112,7 +112,7 @@ class AssessmentSubmitHandler(base.BaseHandler[Dict[str, str], Dict[str, str]]):
 
         domain_responses = []
         for rd in responses_dicts:
-            # We enforce that all properties exist according to domain object
+            # Ensure that all properties exist according to domain object.
             resp = assessment_domain.AssessmentQuestionResponse(
                 response_id=rd['id'],
                 attempt_id=attempt_id,
@@ -136,7 +136,7 @@ class AssessmentSubmitHandler(base.BaseHandler[Dict[str, str], Dict[str, str]]):
 class LearnerCertificatesHandler(
     base.BaseHandler[Dict[str, str], Dict[str, str]]
 ):
-    """Handler for fetching earned certificates for a learner"""
+    """Handler for fetching earned certificates for a learner."""
 
     GET_HANDLER_ERROR_RETURN_TYPE = feconf.HANDLER_TYPE_JSON
     URL_PATH_ARGS_SCHEMAS: Dict[str, str] = {}
@@ -145,7 +145,7 @@ class LearnerCertificatesHandler(
     @acl_decorators.can_access_learner_dashboard
     def get(self) -> None:
         """Handles GET requests to fetch earned certificates."""
-        # This service method returns successful attempts
+        # The following service method returns successful attempts.
         certificates = assessment_services.get_earned_certificates(self.user_id)
 
         self.render_json({'certificates': [c.to_dict() for c in certificates]})

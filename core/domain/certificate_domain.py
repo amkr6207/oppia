@@ -18,13 +18,33 @@
 
 from __future__ import annotations
 
+import datetime
+
 from core import utils
 
-# Here we use type Any because the to_dict method returns a dictionary
-# that maps string keys to various types of values (str, int, list)
-# depending on the field, and there is no single specific type that
-# can represent all of these.
-from typing import Any, Dict, List
+from typing import List, TypedDict
+
+
+class UserCertificateDict(TypedDict):
+    """Dict representation of a user certificate."""
+
+    id: str
+    user_id: str
+    offering_id: str
+    offering_version: int
+    earned_time: float
+
+
+class CertificateOfferingDict(TypedDict):
+    """Dict representation of a certificate offering."""
+
+    id: str
+    name: str
+    description: str
+    classroom_id: str
+    attached_skill_ids: List[str]
+    time_limit_in_minutes: int
+    version: int
 
 
 class CertificateAssessmentOffering:
@@ -85,7 +105,7 @@ class CertificateAssessmentOffering:
         if not isinstance(self.version, int):
             raise utils.ValidationError('Version must be an integer')
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> CertificateOfferingDict:
         """Returns a dict representation of the offering."""
         return {
             'id': self.id,
@@ -95,4 +115,33 @@ class CertificateAssessmentOffering:
             'attached_skill_ids': self.attached_skill_ids,
             'time_limit_in_minutes': self.time_limit_in_minutes,
             'version': self.version,
+        }
+
+
+class UserCertificate:
+    """Domain object for a user certificate."""
+
+    def __init__(
+        self,
+        certificate_id: str,
+        user_id: str,
+        offering_id: str,
+        offering_version: int,
+        earned_time: datetime.datetime,
+    ) -> None:
+        """Initializes a UserCertificate domain object."""
+        self.id = certificate_id
+        self.user_id = user_id
+        self.offering_id = offering_id
+        self.offering_version = offering_version
+        self.earned_time = earned_time
+
+    def to_dict(self) -> UserCertificateDict:
+        """Returns a dict representation of the certificate."""
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'offering_id': self.offering_id,
+            'offering_version': self.offering_version,
+            'earned_time': utils.get_time_in_millisecs(self.earned_time),
         }

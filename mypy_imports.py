@@ -54,12 +54,14 @@ from core.storage.activity import gae_models as activity_models
 from core.storage.app_feedback_report import (
     gae_models as app_feedback_report_models,
 )
+from core.storage.assessment import gae_models as assessment_models
 from core.storage.audit import gae_models as audit_models
 from core.storage.auth import gae_models as auth_models
 from core.storage.base_model import gae_models as base_models
 from core.storage.beam_job import gae_models as beam_job_models
 from core.storage.blog import gae_models as blog_models
 from core.storage.blog_statistics import gae_models as blog_stats_models
+from core.storage.certificate import gae_models as certificate_models
 from core.storage.classroom import gae_models as classroom_models
 from core.storage.cloud_task import gae_models as cloud_task_models
 from core.storage.collection import gae_models as collection_models
@@ -87,6 +89,7 @@ __all__ = [
     'activity_models',
     'app_feedback_report_models',
     'app_identity_services',
+    'assessment_models',
     'audit_models',
     'auth_models',
     'base_models',
@@ -94,6 +97,7 @@ __all__ = [
     'blog_models',
     'blog_stats_models',
     'bulk_email_services',
+    'certificate_models',
     'classroom_models',
     'cloud_task_models',
     'collection_models',

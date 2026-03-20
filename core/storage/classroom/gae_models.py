@@ -177,7 +177,7 @@ class ClassroomModel(base_models.BaseModel):
         banner_bg_color: str,
         banner_size_in_bytes: int,
         index: int,
-        certificate_assessment_offering_ids: List[str] = [],
+        certificate_assessment_offering_ids: Optional[List[str]] = None,
     ) -> ClassroomModel:
         """Creates a new ClassroomModel entry.
 
@@ -205,7 +205,6 @@ class ClassroomModel(base_models.BaseModel):
             certificate_assessment_offering_ids: list(str). The certificate
                 assessment offering IDs.
 
-
         Returns:
             ClassroomModel. The newly created ClassroomModel instance.
 
@@ -216,6 +215,9 @@ class ClassroomModel(base_models.BaseModel):
             raise Exception(
                 'A classroom with the given classroom ID already exists.'
             )
+
+        if certificate_assessment_offering_ids is None:
+            certificate_assessment_offering_ids = []
 
         entity = cls(
             id=classroom_id,

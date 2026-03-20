@@ -20,12 +20,12 @@ from core import feconf
 from core.constants import constants
 from core.controllers import acl_decorators, base
 from core.domain import (
+    certificate_services,
     classroom_config_domain,
     classroom_config_services,
     fs_services,
     topic_domain,
     topic_fetchers,
-    certificate_services,
 )
 
 from typing import Dict, List, TypedDict

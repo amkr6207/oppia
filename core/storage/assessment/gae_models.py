@@ -18,10 +18,11 @@
 
 from __future__ import annotations
 
+import datetime
+
 from core import utils
 from core.platform import models
 
-import datetime
 from typing import Dict, List, Optional, cast
 
 MYPY = False
@@ -119,6 +120,8 @@ class AssessmentAttemptModel(base_models.BaseModel):
             dict. The exported data.
         """
         user_data = {}
+        # Here we use cast because Mypy is unable to infer the correct type
+        # for datastore query results.
         attempt_models = cast(
             List[AssessmentAttemptModel],
             cls.query(cls.user_id == user_id).fetch(),
@@ -244,6 +247,8 @@ class AssessmentQuestionResponseModel(base_models.BaseModel):
     def export_data(cls, user_id: str) -> Dict[str, Dict[str, str]]:
         """Exports the user data."""
         user_data = {}
+        # Here we use cast because Mypy is unable to infer the correct type
+        # for datastore query results.
         response_models = cast(
             List[AssessmentQuestionResponseModel],
             cls.query(cls.user_id == user_id).fetch(),

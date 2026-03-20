@@ -35,7 +35,7 @@ from core.platform import models
 # Here we use type Any because the function returns a list of
 # dictionaries that contain mixed types of values (question dicts,
 # skill IDs, and difficulty floats).
-from typing import Dict, List, Optional, cast
+from typing import List, Optional, cast
 
 MYPY = False
 if MYPY:  # pragma: no cover
@@ -162,6 +162,9 @@ def fetch_questions_for_certificate(
     result = []
     for index, q in enumerate(questions):
         if q is not None:
+            # Here we use cast because the underlying to_dict() method
+            # returns a broad QuestionDict, which we need to treat as
+            # QuestionWithMetadataDict for adding metadata fields.
             question_dict = cast(
                 assessment_domain.QuestionWithMetadataDict, q.to_dict()
             )
@@ -240,6 +243,8 @@ def get_earned_certificates(
     user_id: str,
 ) -> List[assessment_domain.AssessmentAttempt]:
     """Returns all successful assessment attempts for a user."""
+    # Here we use cast because Mypy is unable to infer the correct type
+    # for datastore query results.
     attempt_models = cast(
         List[assessment_models.AssessmentAttemptModel],
         assessment_models.AssessmentAttemptModel.query(

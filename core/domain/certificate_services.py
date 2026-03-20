@@ -128,6 +128,8 @@ def get_certificate_assessment_offerings_by_classroom_id(
     Returns:
         list(CertificateAssessmentOffering). A list of certificate offerings.
     """
+    # Here we use cast because Mypy is unable to infer the correct type
+    # for datastore query results.
     offering_models = cast(
         List[certificate_models.CertificateAssessmentOfferingModel],
         certificate_models.CertificateAssessmentOfferingModel.get_all()
@@ -151,6 +153,8 @@ def get_all_certificate_assessment_offerings() -> (
     Returns:
         list(CertificateAssessmentOffering). A list of all certificate offerings.
     """
+    # Here we use cast because Mypy is unable to infer the correct type
+    # for datastore query results.
     offering_models = cast(
         List[certificate_models.CertificateAssessmentOfferingModel],
         certificate_models.CertificateAssessmentOfferingModel.get_all().fetch(),

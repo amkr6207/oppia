@@ -1,0 +1,39 @@
+<div class="modal-header">
+  <h3>Create New Certificate Offering</h3>
+</div>
+<div class="modal-body">
+  <div class="form-group">
+    <label>Certificate Name</label>
+    <input type="text" class="form-control e2e-test-certificate-name-field" [(ngModel)]="name" placeholder="e.g. Basic Mathematics">
+  </div>
+  <div class="form-group">
+    <label>Description</label>
+    <textarea class="form-control e2e-test-certificate-description-field" [(ngModel)]="description" placeholder="Describe the certificate..."></textarea>
+  </div>
+  <div class="form-group">
+    <label>Classroom</label>
+    <select class="form-control e2e-test-certificate-classroom-select" [(ngModel)]="selectedClassroomId">
+      <option value="">Select a classroom</option>
+      <option *ngFor="let classroom of classrooms" [value]="classroom">{{ classroom }}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label>Skills to Assess</label>
+    <div class="skills-list" style="max-height: 200px; overflow-y: auto; border: 1px solid #ccc; padding: 10px;">
+      <div *ngFor="let skill of allSkills" class="checkbox">
+        <label>
+          <input type="checkbox" [checked]="selectedSkillIds.indexOf(skill.id) !== -1" (change)="toggleSkill(skill.id)" class="e2e-test-certificate-skill-checkbox">
+          {{ skill.description }}
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Time Limit (minutes)</label>
+    <input type="number" class="form-control e2e-test-certificate-time-limit-field" [(ngModel)]="timeLimit">
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-secondary" (click)="cancel()">Cancel</button>
+  <button class="btn btn-success e2e-test-confirm-certificate-creation-button" (click)="save()" [disabled]="!isValid()">Create</button>
+</div>

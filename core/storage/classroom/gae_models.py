@@ -86,6 +86,10 @@ class ClassroomModel(base_models.BaseModel):
     banner_size_in_bytes = datastore_services.IntegerProperty(indexed=False)
     # The index of the classroom.
     index = datastore_services.IntegerProperty(indexed=True)
+    # The certificate assessment offering IDs attached to this classroom.
+    certificate_assessment_offering_ids = datastore_services.StringProperty(
+        repeated=True, indexed=True
+    )
 
     @staticmethod
     def get_deletion_policy() -> base_models.DELETION_POLICY:
@@ -124,6 +128,9 @@ class ClassroomModel(base_models.BaseModel):
                 'banner_bg_color': base_models.EXPORT_POLICY.NOT_APPLICABLE,
                 'banner_size_in_bytes': base_models.EXPORT_POLICY.NOT_APPLICABLE,
                 'index': base_models.EXPORT_POLICY.NOT_APPLICABLE,
+                'certificate_assessment_offering_ids': (
+                    base_models.EXPORT_POLICY.NOT_APPLICABLE
+                ),
             },
         )
 
@@ -170,6 +177,7 @@ class ClassroomModel(base_models.BaseModel):
         banner_bg_color: str,
         banner_size_in_bytes: int,
         index: int,
+        certificate_assessment_offering_ids: List[str] = [],
     ) -> ClassroomModel:
         """Creates a new ClassroomModel entry.
 
@@ -194,6 +202,9 @@ class ClassroomModel(base_models.BaseModel):
             banner_bg_color: str. Classroom's banner background color.
             banner_size_in_bytes: int. The banner size in bytes.
             index: int. The index of the classroom.
+            certificate_assessment_offering_ids: list(str). The certificate
+                assessment offering IDs.
+
 
         Returns:
             ClassroomModel. The newly created ClassroomModel instance.
@@ -225,6 +236,9 @@ class ClassroomModel(base_models.BaseModel):
             banner_bg_color=banner_bg_color,
             banner_size_in_bytes=banner_size_in_bytes,
             index=index,
+            certificate_assessment_offering_ids=(
+                certificate_assessment_offering_ids
+            ),
         )
         entity.update_timestamps()
         entity.put()

@@ -354,6 +354,33 @@ export class TopicsAndSkillsDashboardBackendApiService {
       );
   }
 
+  async createCertificateOfferingAsync(
+    offeringId: string,
+    name: string,
+    description: string,
+    classroomId: string,
+    attachedSkillIds: string[],
+    timeLimitInMinutes: number
+  ): Promise<void> {
+    const offeringData = {
+      offering_id: offeringId,
+      name: name,
+      description: description,
+      classroom_id: classroomId,
+      attached_skill_ids: attachedSkillIds,
+      time_limit_in_minutes: timeLimitInMinutes,
+    };
+    return this.http
+      .post<void>('/certificate_offering_handler', offeringData)
+      .toPromise()
+      .then(
+        response => response,
+        errorResponse => {
+          throw new Error(errorResponse.error.error);
+        }
+      );
+  }
+
   get onTopicsAndSkillsDashboardReinitialized(): EventEmitter<boolean> {
     return this._topicsAndSkillsDashboardReinitializedEventEmitter;
   }

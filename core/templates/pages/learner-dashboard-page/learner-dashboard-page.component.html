@@ -37,6 +37,12 @@
             (keyup.enter)="setActiveSection(LEARNER_DASHBOARD_SECTION_I18N_IDS.COMMUNITY_LESSONS)">
           <span [innerHTML]="LEARNER_DASHBOARD_SECTION_I18N_IDS.COMMUNITY_LESSONS | translate"></span>
         </h4>
+        <h4 class="oppia-learner-dashboard-menu oppia-learner-dashborad-menu-hover e2e-test-certificates-section" tabindex="0"
+            [ngClass]="{'oppia-learner-dashboard-section-active': activeSection === LEARNER_DASHBOARD_SECTION_I18N_IDS.CERTIFICATES}"
+            (click)="setActiveSection(LEARNER_DASHBOARD_SECTION_I18N_IDS.CERTIFICATES)"
+            (keyup.enter)="setActiveSection(LEARNER_DASHBOARD_SECTION_I18N_IDS.CERTIFICATES)">
+          <span [innerHTML]="LEARNER_DASHBOARD_SECTION_I18N_IDS.CERTIFICATES | translate"></span>
+        </h4>
       </mat-card>
     </div>
     <nav class="align-items-center d-flex flex-md-column justify-content-center oppia-learner-dash-sidebar_position" role="navigation" *ngIf="isShowRedesignedLearnerDashboardActive()">
@@ -82,6 +88,17 @@
             {{ LEARNER_DASHBOARD_SECTION_I18N_IDS.PROGRESS | translate }}
           </button>
         </li>
+        <li>
+          <button aria-label="Go to certificates tab"
+                  class="align-items-center d-inline-flex e2e-test-certificates-section rounded oppia-learner-dash-sidebar_btn text-left w-100"
+                  tabindex="0"
+                  [ngClass]="{'oppia-learner-dash-sidebar_btn--active': activeSection === LEARNER_DASHBOARD_SECTION_I18N_IDS.CERTIFICATES}"
+                  (click)="setActiveSection(LEARNER_DASHBOARD_SECTION_I18N_IDS.CERTIFICATES)"
+                  (keyup.enter)="setActiveSection(LEARNER_DASHBOARD_SECTION_I18N_IDS.CERTIFICATES)">
+            <span aria-hidden="true" class="fas fa-certificate fa-lg"></span>
+            {{ LEARNER_DASHBOARD_SECTION_I18N_IDS.CERTIFICATES | translate }}
+          </button>
+        </li>
       </ol>
     </nav>
     <footer class="oppia-learner-dashboard-buttons" *ngIf="windowIsNarrow && !isShowRedesignedLearnerDashboardActive()" headroom>
@@ -101,6 +118,10 @@
         <div class="oppia-buttons" *ngIf="LEARNER_GROUP_FEATURE_IS_ENABLED" (click)="setActiveSection(LEARNER_DASHBOARD_SECTION_I18N_IDS.LEARNER_GROUPS)" [ngClass]="{'oppia-learner-dashboard-section-active-button': activeSection === LEARNER_DASHBOARD_SECTION_I18N_IDS.LEARNER_GROUPS, 'oppia-learner-dashboard-section-not-active-button': activeSection !== LEARNER_DASHBOARD_SECTION_I18N_IDS.LEARNER_GROUPS}">
           <i class="fa fa-users learner-groups-icon" aria-hidden="true"></i>
           <span [innerHTML]="LEARNER_DASHBOARD_SECTION_I18N_IDS.LEARNER_GROUPS | translate" class="learner-groups-button"></span>
+        </div>
+        <div class="oppia-buttons e2e-test-certificates-section" (click)="setActiveSection(LEARNER_DASHBOARD_SECTION_I18N_IDS.CERTIFICATES)" [ngClass]="{'oppia-learner-dashboard-section-active-button': activeSection === LEARNER_DASHBOARD_SECTION_I18N_IDS.CERTIFICATES, 'oppia-learner-dashboard-section-not-active-button': activeSection !== LEARNER_DASHBOARD_SECTION_I18N_IDS.CERTIFICATES}">
+          <i class="fa fa-certificate learner-certificates-icon" aria-hidden="true"></i>
+          <span [innerHTML]="LEARNER_DASHBOARD_SECTION_I18N_IDS.CERTIFICATES | translate" class="certificates-button"></span>
         </div>
       </mat-card>
     </footer>
@@ -182,6 +203,9 @@
                                        [currentGoals]="topicsToLearn"
                                        [subtopicMasteries]="subtopicMasteries">
           </oppia-progress-tab>
+        </div>
+        <div class="w-100" *ngIf="activeSection === LEARNER_DASHBOARD_SECTION_I18N_IDS.CERTIFICATES">
+          <oppia-certificates-tab></oppia-certificates-tab>
         </div>
       </div>
     </div>

@@ -1,0 +1,33 @@
+.assessment-score-body {
+  padding: 40px 20px;
+}
+
+.score-circle {
+  align-items: center;
+  border: 10px solid #ccc;
+  border-radius: 50%;
+  display: flex;
+  height: 150px;
+  justify-content: center;
+  margin: 0 auto 30px;
+  width: 150px;
+}
+
+.score-circle.passed {
+  border-color: #00645c;
+  color: #00645c;
+}
+
+.score-circle.failed {
+  border-color: #d95c5c;
+  color: #d95c5c;
+}
+
+.score-text {
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.result-message h3 {
+  margin-top: 0;
+}

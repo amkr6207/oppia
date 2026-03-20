@@ -1,0 +1,30 @@
+<div class="oppia-certificates-tab-container e2e-test-certificates-tab-container">
+  <div *ngIf="isLoading" class="text-center mt-5">
+    <i class="fa fa-spinner fa-spin oppia-loading-spinner"></i>
+    <p [innerHTML]="'I18N_LEARNER_DASHBOARD_LOADING_CERTIFICATES' | translate"></p>
+  </div>
+
+  <div *ngIf="!isLoading && certificates.length === 0" class="text-center mt-5 no-certificates e2e-test-no-certificates-message">
+    <img [src]="getCertificateImageUrl()" alt="Certificate Icon" class="mb-3">
+    <h3 [innerHTML]="'I18N_LEARNER_DASHBOARD_NO_CERTIFICATES_TITLE' | translate"></h3>
+    <p [innerHTML]="'I18N_LEARNER_DASHBOARD_NO_CERTIFICATES_MESSAGE' | translate"></p>
+  </div>
+
+  <div *ngIf="!isLoading && certificates.length > 0" class="certificates-grid mt-4">
+    <div *ngFor="let cert of certificates" class="certificate-card mat-elevation-z2 e2e-test-certificate-card">
+      <div class="cert-icon-container">
+        <i class="fa fa-certificate cert-icon"></i>
+      </div>
+      <div class="cert-details">
+        <h4>{{ cert.offering_name || 'Mathematics Certificate' }}</h4>
+        <p class="cert-date">{{ 'I18N_LEARNER_DASHBOARD_CERTIFICATE_ISSUED_ON' | translate }}: {{ formatDate(cert.end_time) }}</p>
+        <p class="cert-score">{{ 'I18N_LEARNER_DASHBOARD_CERTIFICATE_SCORE' | translate }}: {{ cert.score_percentage }}%</p>
+      </div>
+      <div class="cert-actions">
+        <button class="btn btn-secondary e2e-test-view-certificate-button" (click)="viewCertificate(cert.id)">
+          {{ 'I18N_LEARNER_DASHBOARD_VIEW_CERTIFICATE' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

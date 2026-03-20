@@ -1,0 +1,26 @@
+.assessment-player-body {
+  min-height: 300px;
+  padding: 20px;
+}
+
+.assessment-loading {
+  padding-top: 50px;
+}
+
+.assessment-loading .fa-spinner {
+  font-size: 40px;
+}
+
+.question-progress {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.question-content {
+  min-height: 200px;
+}
+
+.question-prompt {
+  margin-bottom: 20px;
+}

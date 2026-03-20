@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Certificate Of Achievement - {{ certificate_name }}</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      background-color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .certificate-container {
+      width: 800px;
+      padding: 50px;
+      background: white;
+      border: 20px solid #00645c;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      text-align: center;
+      position: relative;
+    }
+    .certificate-header {
+      font-size: 50px;
+      color: #00645c;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+    .certificate-subheader {
+      font-size: 24px;
+      font-style: italic;
+      margin-bottom: 40px;
+    }
+    .learner-name {
+      font-size: 40px;
+      font-weight: bold;
+      border-bottom: 2px solid #333;
+      display: inline-block;
+      margin-bottom: 20px;
+      padding: 0 20px;
+    }
+    .certificate-text {
+      font-size: 20px;
+      line-height: 1.6;
+      margin: 30px 0;
+    }
+    .certificate-footer {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 60px;
+      padding: 0 50px;
+    }
+    .signature {
+      border-top: 1px solid #333;
+      width: 200px;
+      padding-top: 10px;
+      font-weight: bold;
+    }
+    .oppia-logo {
+      font-size: 30px;
+      font-weight: bold;
+      color: #00645c;
+    }
+    .print-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 10px 20px;
+      background: #00645c;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    @media print {
+      .print-btn { display: none; }
+      body { background: white; }
+      .certificate-container { box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="certificate-container">
+    <button class="print-btn" onclick="window.print()">Print PDF</button>
+
+    <div class="certificate-header">Certificate of Achievement</div>
+    <div class="certificate-subheader">This is to certify that</div>
+    
+    <div class="learner-name">{{ learner_name }}</div>
+    
+    <div class="certificate-text">
+      has successfully passed the assessment for<br>
+      <strong style="font-size: 28px;">{{ certificate_name }}</strong><br>
+      on the Oppia Learning Platform with a score of {{ score }}%.
+    </div>
+
+    <div class="certificate-footer">
+      <div>
+        <div class="signature">Oppia Foundation</div>
+        <div style="font-size: 14px;">Organization</div>
+      </div>
+      <div class="oppia-logo">OPPIA</div>
+      <div>
+        <div class="signature">{{ date_earned }}</div>
+        <div style="font-size: 14px;">Date Issued</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -35,6 +35,7 @@ export class ClassroomData {
   _thumbnailData: ImageData;
   _bannerData: ImageData;
   _publicClassroomsCount: number;
+  _certificates: any[];
 
   constructor(
     classroomId: string,
@@ -48,7 +49,8 @@ export class ClassroomData {
     diagnosticTestIsEnabled: boolean,
     thumbnailData: ImageData,
     bannerData: ImageData,
-    publicClassroomsCount: number
+    publicClassroomsCount: number,
+    certificates: any[]
   ) {
     this._classroom_id = classroomId;
     this._name = name;
@@ -62,6 +64,7 @@ export class ClassroomData {
     this._thumbnailData = thumbnailData;
     this._bannerData = bannerData;
     this._publicClassroomsCount = publicClassroomsCount;
+    this._certificates = certificates;
   }
 
   static createFromBackendData(
@@ -76,7 +79,8 @@ export class ClassroomData {
     diagnosticTestIsEnabled: boolean,
     thumbnailData: ImageData,
     bannerData: ImageData,
-    publicClassroomsCount: number
+    publicClassroomsCount: number,
+    certificates: any[]
   ): ClassroomData {
     let topicSummaries = topicSummaryDicts.map(summaryDict => {
       return CreatorTopicSummary.createFromBackendDict(summaryDict);
@@ -93,7 +97,8 @@ export class ClassroomData {
       diagnosticTestIsEnabled,
       thumbnailData,
       bannerData,
-      publicClassroomsCount
+      publicClassroomsCount,
+      certificates
     );
   }
 
@@ -143,5 +148,9 @@ export class ClassroomData {
 
   getClassroomId(): string {
     return this._classroom_id;
+  }
+
+  getCertificates(): any[] {
+    return this._certificates;
   }
 }

@@ -25,6 +25,9 @@ import {BackgroundBannerModule} from 'components/common-layout-directives/common
 import {BaseModule} from 'base-components/base.module';
 import {ClassroomPageComponent} from './classroom-page.component';
 import {ClassroomPageRootComponent} from './classroom-page-root.component';
+import {CertificateCardComponent} from './certificate-card/certificate-card.component';
+import {AssessmentPlayerModalComponent} from './assessment-player-modal/assessment-player-modal.component';
+import {AssessmentScoreModalComponent} from './assessment-score-modal/assessment-score-modal.component';
 import {ClassroomPageRoutingModule} from './classroom-page-routing.module';
 import {RichTextComponentsModule} from 'rich_text_components/rich-text-components.module';
 import {SearchBarModule} from 'pages/library-page/search-bar/search-bar.module';
@@ -46,7 +49,19 @@ import {Error404PageModule} from 'pages/error-pages/error-404/error-404-page.mod
     TranslateModule,
     Error404PageModule,
   ],
-  declarations: [ClassroomPageComponent, ClassroomPageRootComponent],
-  entryComponents: [ClassroomPageComponent, ClassroomPageRootComponent],
+  declarations: [
+    ClassroomPageComponent,
+    ClassroomPageRootComponent,
+    CertificateCardComponent,
+    AssessmentPlayerModalComponent,
+    AssessmentScoreModalComponent,
+  ],
+  entryComponents: [
+    ClassroomPageComponent,
+    ClassroomPageRootComponent,
+    CertificateCardComponent,
+    AssessmentPlayerModalComponent,
+    AssessmentScoreModalComponent,
+  ],
 })
 export class ClassroomPageModule {}

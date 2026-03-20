@@ -1,0 +1,49 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{ certificateName }} - Assessment</h4>
+  <button type="button" class="close" aria-label="Close" (click)="closeModal()" [disabled]="isSubmitting">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body assessment-player-body">
+  <div *ngIf="isLoading" class="assessment-loading text-center mt-5">
+    <i class="fa fa-spinner fa-spin"></i>
+    <p>Loading questions...</p>
+  </div>
+
+  <div *ngIf="!isLoading && questions.length === 0" class="assessment-no-questions">
+    <p>No questions are available for this assessment. Please contact the administrator.</p>
+  </div>
+
+  <div *ngIf="!isLoading && questions.length > 0">
+    <div class="question-progress">
+      Question {{ currentQuestionIndex + 1 }} of {{ questions.length }}
+    </div>
+
+    <div class="question-content">
+      <!-- Simplified mock of questioning ui. -->
+      <div class="question-prompt" [innerHTML]="getCurrentQuestion()?.question_dict?.question_state_data?.content?.html">
+      </div>
+
+      <div class="question-interaction">
+        <!-- Would normally render proper interaction components here. -->
+        <p><i>Interaction component goes here. Due to UI mock, selecting dummy answer.</i></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-footer" *ngIf="!isLoading && questions.length > 0">
+  <button class="btn btn-secondary" (click)="previousQuestion()" [disabled]="currentQuestionIndex === 0 || isSubmitting">
+    Previous
+  </button>
+
+  <button class="btn btn-primary" (click)="nextQuestion()" *ngIf="currentQuestionIndex < questions.length - 1" [disabled]="isSubmitting">
+    Next
+  </button>
+
+  <button class="btn btn-success" (click)="submitAssessment()" *ngIf="currentQuestionIndex === questions.length - 1" [disabled]="isSubmitting">
+    <span *ngIf="!isSubmitting">Submit Assessment</span>
+    <span *ngIf="isSubmitting">Submitting...</span>
+  </button>
+</div>

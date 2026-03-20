@@ -32,6 +32,7 @@ import {LearnerTopicGoalsSummaryTileComponent} from 'components/summary-tile/lea
 import {OldProgressTabComponent} from './old-progress-tab.component';
 import {GoalsTabComponent} from './goals-tab.component';
 import {ProgressTabComponent} from './progress-tab.component';
+import {CertificatesTabComponent} from './certificates-tab.component';
 import {LearnerTopicSummaryTileComponent} from 'components/summary-tile/learner-topic-summary-tile.component';
 import {HomeTabComponent} from './home-tab.component';
 import {LearnerGroupsTabComponent} from './learner-groups-tab.component';
@@ -96,6 +97,7 @@ import {NgCircleProgressModule} from 'ng-circle-progress';
     DeclineInvitationModalComponent,
     ViewLearnerGroupInvitationModalComponent,
     ViewLearnerGroupDetailsModalComponent,
+    CertificatesTabComponent,
   ],
   entryComponents: [
     AddGoalsModalComponent,
@@ -117,6 +119,7 @@ import {NgCircleProgressModule} from 'ng-circle-progress';
     DeclineInvitationModalComponent,
     ViewLearnerGroupInvitationModalComponent,
     ViewLearnerGroupDetailsModalComponent,
+    CertificatesTabComponent,
   ],
   providers: [LearnerDashboardActivityBackendApiService],
 })

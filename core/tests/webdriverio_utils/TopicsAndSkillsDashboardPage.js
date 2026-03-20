@@ -105,6 +105,9 @@ var TopicsAndSkillsDashboardPage = function () {
     '.e2e-test-mobile-assign-skill-to-topic-button'
   );
   var skillOptions = $('.e2e-test-mobile-skills-option');
+  var certificatesTab = $('.e2e-test-certificates-tab');
+  var createCertificateButton = $('.e2e-test-create-certificate-button');
+  var noCertificatesMessage = $('.e2e-test-no-certificates-message');
 
   this.get = async function () {
     await waitFor.clientSideRedirection(
@@ -536,6 +539,15 @@ var TopicsAndSkillsDashboardPage = function () {
     );
   };
 
+  this.navigateToCertificatesTab = async function () {
+    await action.click('Certificates tab button', certificatesTab);
+    await waitFor.pageToFullyLoad();
+  };
+
+  this.clickCreateCertificateButton = async function () {
+    await action.click('Create Certificate button', createCertificateButton);
+  };
+
   this.navigateToSkillsTab = async function () {
     await action.click('Skills tab button', skillsTabButton);
   };
@@ -594,6 +606,14 @@ var TopicsAndSkillsDashboardPage = function () {
     );
     var skillsListItems = await skillsListItemsSelector();
     expect(skillsListItems.length).toEqual(number);
+  };
+
+  this.expectNoCertificatesMessageToBeVisible = async function () {
+    await waitFor.visibilityOf(
+      noCertificatesMessage,
+      'No certificates message taking too long to appear'
+    );
+    expect(await noCertificatesMessage.isDisplayed()).toBe(true);
   };
 
   this.searchSkillByName = async function (name) {

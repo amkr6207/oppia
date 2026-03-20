@@ -28,9 +28,37 @@ var LearnerDashboardPage = function () {
     return $$('.e2e-test-subscription-name');
   };
 
+  var certificatesTab = $('.e2e-test-certificates-tab');
+  var certificateCard = $('.e2e-test-certificate-card');
+  var certificateCardsSelector = function () {
+    return $$('.e2e-test-certificate-card');
+  };
+  var noCertificatesMessage = $('.e2e-test-no-certificates-message');
+
   this.get = async function () {
     await browser.url(LEARNER_DASHBOARD_URL);
     await waitFor.pageToFullyLoad();
+  };
+
+  this.navigateToCertificatesTab = async function () {
+    await action.click('Certificates tab', certificatesTab);
+    await waitFor.pageToFullyLoad();
+  };
+
+  this.expectNumberOfCertificatesToBe = async function (count) {
+    if (count === 0) {
+      await waitFor.visibilityOf(
+        noCertificatesMessage,
+        'No certificates message taking too long to appear'
+      );
+      return;
+    }
+    await waitFor.visibilityOf(
+      certificateCard,
+      'Certificate cards taking too long to appear'
+    );
+    var cards = await certificateCardsSelector();
+    expect(cards.length).toEqual(count);
   };
 
   this.expectSubscriptionFirstNameToMatch = async function (name) {

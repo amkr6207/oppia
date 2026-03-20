@@ -38,6 +38,7 @@ export interface ClassroomDataBackendDict {
   thumbnail_data: ImageData;
   banner_data: ImageData;
   public_classrooms_count: number;
+  certificates: any[];
 }
 
 export interface classroomDisplayInfo {
@@ -176,7 +177,8 @@ export class ClassroomBackendApiService {
             response.diagnostic_test_is_enabled,
             response.thumbnail_data,
             response.banner_data,
-            response.public_classrooms_count
+            response.public_classrooms_count,
+            response.certificates || []
           );
           if (successCallback) {
             successCallback(this.classroomData);

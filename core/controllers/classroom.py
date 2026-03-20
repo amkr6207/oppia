@@ -25,6 +25,7 @@ from core.domain import (
     fs_services,
     topic_domain,
     topic_fetchers,
+    certificate_services,
 )
 
 from typing import Dict, List, TypedDict
@@ -126,6 +127,11 @@ class ClassroomDataHandler(base.BaseHandler[Dict[str, str], Dict[str, str]]):
                 }
                 topic_summary_dicts.append(classroom_page_topic_summary_dict)
 
+        offerings = certificate_services.get_certificate_assessment_offerings_by_classroom_id(
+            classroom.classroom_id
+        )
+        offerings_dicts = [offering.to_dict() for offering in offerings]
+
         self.values.update(
             {
                 'topic_summary_dicts': topic_summary_dicts,
@@ -140,6 +146,7 @@ class ClassroomDataHandler(base.BaseHandler[Dict[str, str], Dict[str, str]]):
                 'banner_data': classroom.banner_data.to_dict(),
                 'public_classrooms_count': public_classrooms_count,
                 'classroom_id': classroom.classroom_id,
+                'certificates': offerings_dicts,
             }
         )
         self.render_json(self.values)

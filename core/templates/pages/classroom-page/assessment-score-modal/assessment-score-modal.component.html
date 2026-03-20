@@ -1,0 +1,26 @@
+<div class="modal-header">
+  <h4 class="modal-title">Assessment Results: {{ certificateName }}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body assessment-score-body text-center">
+  <div class="score-circle" [ngClass]="{'passed': passed, 'failed': !passed}">
+    <span class="score-text">{{ scorePercentage }}%</span>
+  </div>
+
+  <div class="result-message">
+    <h3 *ngIf="passed" class="text-success">Congratulations!</h3>
+    <p *ngIf="passed">You have successfully passed the assessment and earned the certificate for <strong>{{ certificateName }}</strong>.</p>
+
+    <h3 *ngIf="!passed" class="text-danger">Keep trying!</h3>
+    <p *ngIf="!passed">You did not pass the assessment this time. Review the topics and try again!</p>
+  </div>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-primary" (click)="closeModal()">
+    Close
+  </button>
+</div>

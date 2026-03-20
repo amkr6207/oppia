@@ -53,6 +53,7 @@ class ClassroomModelUnitTest(test_utils.GenericTestBase):
             banner_bg_color='transparent',
             banner_size_in_bytes=1000,
             index=0,
+            certificate_assessment_offering_ids=['offering_id_1'],
         )
         self.classroom_model.update_timestamps()
         self.classroom_model.put()
@@ -78,6 +79,7 @@ class ClassroomModelUnitTest(test_utils.GenericTestBase):
             'transparent',
             1000,
             0,
+            ['offering_id_1'],
         )
 
         self.assertEqual(classroom_model_instance.name, 'physics')
@@ -107,6 +109,10 @@ class ClassroomModelUnitTest(test_utils.GenericTestBase):
         )
         self.assertEqual(classroom_model_instance.banner_size_in_bytes, 1000)
         self.assertEqual(classroom_model_instance.index, 0)
+        self.assertEqual(
+            classroom_model_instance.certificate_assessment_offering_ids,
+            ['offering_id_1'],
+        )
 
     def test_get_export_policy_not_applicable(self) -> None:
         self.assertEqual(
@@ -140,6 +146,9 @@ class ClassroomModelUnitTest(test_utils.GenericTestBase):
                     base_models.EXPORT_POLICY.NOT_APPLICABLE
                 ),
                 'index': base_models.EXPORT_POLICY.NOT_APPLICABLE,
+                'certificate_assessment_offering_ids': (
+                    base_models.EXPORT_POLICY.NOT_APPLICABLE
+                ),
             },
         )
 
@@ -220,6 +229,7 @@ class ClassroomModelUnitTest(test_utils.GenericTestBase):
                     'transparent',
                     1000,
                     0,
+                    ['offering_id_1'],
                 )
 
         # Test generate_new_classroom_id method.

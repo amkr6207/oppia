@@ -70,6 +70,13 @@
           </oppia-topic-summary-tile>
         </div>
       </div>
+      <div *ngIf="classroomData?.getCertificates()?.length > 0" class="certificates-container" style="margin-top: 50px;">
+        <h1 class="classroom-content-heading">Available Certificates</h1>
+        <p class="classroom-content-text">Earn a certificate by taking an assessment to prove your mastery of these topics!</p>
+        <div *ngFor="let certificate of classroomData.getCertificates()" class="certificate-card-wrapper">
+          <oppia-certificate-card [certificateOffering]="certificate"></oppia-certificate-card>
+        </div>
+      </div>
     </div>
   </div>
 

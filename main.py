@@ -25,11 +25,14 @@ from core.controllers import (
     acl_decorators,
     admin,
     android,
+    assessment,
     base,
     beam_jobs,
     blog_admin,
     blog_dashboard,
     blog_homepage,
+    certificate,
+    certificate_viewer,
     classroom,
     collection_editor,
     collection_viewer,
@@ -501,6 +504,26 @@ URLS = [
     get_redirect_route(
         r'%s' % feconf.NEW_SKILL_URL,
         topics_and_skills_dashboard.NewSkillHandler,
+    ),
+    get_redirect_route(
+        r'/certificate_offering_handler',
+        certificate.CertificateOfferingHandler,
+    ),
+    get_redirect_route(
+        r'/assessment_attempt_handler',
+        assessment.AssessmentAttemptHandler,
+    ),
+    get_redirect_route(
+        r'/assessment_submit_handler',
+        assessment.AssessmentSubmitHandler,
+    ),
+    get_redirect_route(
+        r'/learner_certificates_handler',
+        assessment.LearnerCertificatesHandler,
+    ),
+    get_redirect_route(
+        r'/certificate_viewer/<attempt_id>',
+        certificate_viewer.CertificateViewerPage,
     ),
     get_redirect_route(
         r'%s' % feconf.NEW_QUESTION_URL, question_editor.QuestionCreationHandler

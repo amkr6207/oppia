@@ -1,0 +1,32 @@
+<div class="certificates-list-container e2e-test-certificates-list-container">
+  <div class="mat-card">
+    <div class="list-header">
+      <h3>Certificate Offerings</h3>
+      <button class="btn oppia-dashboard-intro-button oppia-transition-200 oppia-create-button-text e2e-test-create-certificate-button" (click)="createCertificate()">
+        Create Certificate
+      </button>
+    </div>
+    <div class="list-body">
+      <p class="e2e-test-no-certificates-message">No certificates created yet. Start by creating a new certificate mapped to skills.</p>
+    </div>
+  </div>
+</div>
+<style>
+  .certificates-list-container {
+    padding: 24px;
+  }
+  .mat-card {
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 24px;
+  }
+  .list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+  }
+</style>

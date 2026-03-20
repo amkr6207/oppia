@@ -138,6 +138,18 @@ class _Gae(Platform):
                 )
 
                 returned_models.append(blog_stats_models)
+            elif name == Names.CERTIFICATE:
+                from core.storage.certificate import (
+                    gae_models as certificate_models,
+                )
+
+                returned_models.append(certificate_models)
+            elif name == Names.ASSESSMENT:
+                from core.storage.assessment import (
+                    gae_models as assessment_models,
+                )
+
+                returned_models.append(assessment_models)
             elif name == Names.CLASSROOM:
                 from core.storage.classroom import (
                     gae_models as classroom_models,

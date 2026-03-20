@@ -1,0 +1,40 @@
+.oppia-certificate-card {
+  align-items: center;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+.certificate-info {
+  flex: 1;
+}
+
+.certificate-name {
+  color: #00645c;
+  margin-top: 0;
+}
+
+.certificate-details {
+  color: #666;
+  font-size: 0.9em;
+  margin-top: 10px;
+}
+
+.certificate-action {
+  margin-left: 20px;
+}
+
+.start-assessment-btn {
+  background-color: #00645c;
+  border-color: #00645c;
+  color: #fff;
+}
+
+.start-assessment-btn:hover {
+  background-color: #00564d;
+  border-color: #004d44;
+}

@@ -86,6 +86,7 @@ export class TopicsAndSkillsDashboardPageComponent {
   MOVE_TO_NEXT_PAGE: string = 'next_page';
   MOVE_TO_PREV_PAGE: string = 'prev_page';
   TAB_NAME_SKILLS: string = 'skills';
+  TAB_NAME_CERTIFICATES: string = 'certificates';
   pageNumber: number = 0;
   topicPageNumber: number = 0;
   itemsPerPage: number = 10;
@@ -215,6 +216,8 @@ export class TopicsAndSkillsDashboardPageComponent {
     } else if (this.activeTab === this.TAB_NAME_SKILLS) {
       this.initSkillDashboard();
       this.focusManagerService.setFocus('createSkillBtn');
+    } else if (this.activeTab === this.TAB_NAME_CERTIFICATES) {
+      // Nothing specific to init for certificates yet.
     }
   }
 

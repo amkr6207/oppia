@@ -37,10 +37,12 @@ import {CreateNewTopicModalComponent} from './modals/create-new-topic-modal.comp
 import {ToastrModule} from 'ngx-toastr';
 import {toastrConfig} from 'pages/oppia-root/app.module';
 import {TopicsAndSkillsDashboardPageRootComponent} from './topics-and-skills-dashboard-page-root.component';
+import {CertificatesListComponent} from './certificates-list/certificates-list.component';
 import {TopicsAndSkillsDashboardAuthGuard} from './topics-and-skills-dashboard-auth.guard';
 import {TopicCreationService} from 'components/entity-creation-services/topic-creation.service';
 import {CreateNewSkillModalService} from 'pages/topic-editor-page/services/create-new-skill-modal.service';
 import {RteHelperService} from 'services/rte-helper.service';
+import {CreateNewCertificateModalComponent} from './modals/create-new-certificate-modal.component';
 
 @NgModule({
   imports: [
@@ -71,6 +73,8 @@ import {RteHelperService} from 'services/rte-helper.service';
     CreateNewTopicModalComponent,
     DeleteTopicModalComponent,
     TopicsAndSkillsDashboardPageRootComponent,
+    CertificatesListComponent,
+    CreateNewCertificateModalComponent,
   ],
   entryComponents: [
     SkillsListComponent,
@@ -84,6 +88,8 @@ import {RteHelperService} from 'services/rte-helper.service';
     SelectTopicsComponent,
     TopicsAndSkillsDashboardPageComponent,
     CreateNewTopicModalComponent,
+    CertificatesListComponent,
+    CreateNewCertificateModalComponent,
   ],
   providers: [
     TopicCreationService,

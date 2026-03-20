@@ -1,0 +1,14 @@
+<div class="oppia-certificate-card mat-card">
+  <div class="certificate-info">
+    <h3 class="certificate-name">{{ certificateOffering.name }}</h3>
+    <p class="certificate-description">{{ certificateOffering.description }}</p>
+    <div class="certificate-details">
+      <span><i class="fa fa-clock-o"></i> Time Limit: {{ certificateOffering.time_limit_in_minutes }} minutes</span>
+    </div>
+  </div>
+  <div class="certificate-action">
+    <button class="btn btn-success start-assessment-btn" (click)="startAssessment()">
+      Take Assessment
+    </button>
+  </div>
+</div>

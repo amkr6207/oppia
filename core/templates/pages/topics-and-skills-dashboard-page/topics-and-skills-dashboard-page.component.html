@@ -41,6 +41,12 @@
                 Skills
               </a>
             </li>
+            <li [ngClass]="{'dashboard-tabs-active': activeTab === TAB_NAME_CERTIFICATES}">
+              <a class="dashboard-tabs-text e2e-test-certificates-tab"
+                 (click)="setActiveTab(TAB_NAME_CERTIFICATES)">
+                Certificates
+              </a>
+            </li>
           </ul>
         </div>
         <div class="filter-mobile-box">
@@ -116,6 +122,9 @@
             <p class="intro-card-message e2e-test-no-skills-present-message" *ngIf="!displayedSkillSummaries.length">
               No skills to display.
             </p>
+          </div>
+          <div *ngIf="activeTab === TAB_NAME_CERTIFICATES">
+            <oppia-certificates-list></oppia-certificates-list>
           </div>
           <div class="pagination-mobile">
             <div *ngIf="activeTab === TAB_NAME_TOPICS">

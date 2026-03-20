@@ -155,6 +155,8 @@ class ValidModelNames(enum.Enum):
     BEAM_JOB = 'beam_job'
     BLOG = 'blog'
     BLOG_STATISTICS = 'blog_statistics'
+    CERTIFICATE = 'certificate'
+    ASSESSMENT = 'assessment'
     CLASSROOM = 'classroom'
     CLOUD_TASK = 'cloud_task'
     COLLECTION = 'collection'

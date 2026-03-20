@@ -37,9 +37,7 @@ class CertificateViewerPage(base.BaseHandler[Dict[str, str], Dict[str, str]]):
             attempt_id, strict=False
         )
         if not attempt or not attempt.passed:
-            raise self.PageNotFoundException(
-                'Certificate not found or not earned.'
-            )
+            raise base.UserFacingExceptions.NotFoundException()
 
         offering = (
             certificate_services.get_certificate_assessment_offering_by_id(
@@ -53,7 +51,11 @@ class CertificateViewerPage(base.BaseHandler[Dict[str, str], Dict[str, str]]):
                     offering.name if offering else 'Mathematics Mastery'
                 ),
                 'learner_name': self.username if self.username else 'Learner',
-                'date_earned': attempt.end_time.strftime('%B %d, %Y'),
+                'date_earned': (
+                    attempt.end_time.strftime('%B %d, %Y')
+                    if attempt.end_time
+                    else ''
+                ),
                 'score': attempt.score_percentage,
             }
         )

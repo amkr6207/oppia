@@ -35,7 +35,7 @@ from core.platform import models
 # Here we use type Any because the function returns a list of
 # dictionaries that contain mixed types of values (question dicts,
 # skill IDs, and difficulty floats).
-from typing import List, Optional
+from typing import Dict, List, Optional, cast
 
 MYPY = False
 if MYPY:  # pragma: no cover
@@ -162,13 +162,14 @@ def fetch_questions_for_certificate(
     result = []
     for index, q in enumerate(questions):
         if q is not None:
-            result.append(
-                {
-                    'question_dict': q.to_dict(),
-                    'skill_id': all_links[index].skill_id,
-                    'skill_difficulty': all_links[index].skill_difficulty,
-                }
+            question_dict = cast(
+                assessment_domain.QuestionWithMetadataDict, q.to_dict()
             )
+            question_dict['skill_id'] = all_links[index].skill_id
+            question_dict['skill_difficulty'] = all_links[
+                index
+            ].skill_difficulty
+            result.append(question_dict)
 
     return result
 
@@ -239,10 +240,13 @@ def get_earned_certificates(
     user_id: str,
 ) -> List[assessment_domain.AssessmentAttempt]:
     """Returns all successful assessment attempts for a user."""
-    attempt_models = assessment_models.AssessmentAttemptModel.query(
-        assessment_models.AssessmentAttemptModel.user_id == user_id,
-        assessment_models.AssessmentAttemptModel.passed,
-    ).fetch()
+    attempt_models = cast(
+        List[assessment_models.AssessmentAttemptModel],
+        assessment_models.AssessmentAttemptModel.query(
+            assessment_models.AssessmentAttemptModel.user_id == user_id,
+            assessment_models.AssessmentAttemptModel.passed,
+        ).fetch(),
+    )
     certificates = []
     for model in attempt_models:
         offering = (

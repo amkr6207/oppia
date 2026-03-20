@@ -21,7 +21,7 @@ from __future__ import annotations
 from core.domain import certificate_domain
 from core.platform import models
 
-from typing import List, Optional
+from typing import List, Optional, cast
 
 MYPY = False
 if MYPY:  # pragma: no cover
@@ -128,13 +128,14 @@ def get_certificate_assessment_offerings_by_classroom_id(
     Returns:
         list(CertificateAssessmentOffering). A list of certificate offerings.
     """
-    offering_models = (
+    offering_models = cast(
+        List[certificate_models.CertificateAssessmentOfferingModel],
         certificate_models.CertificateAssessmentOfferingModel.get_all()
         .filter(
             certificate_models.CertificateAssessmentOfferingModel.classroom_id
             == classroom_id
         )
-        .fetch()
+        .fetch(),
     )
     return [
         _get_certificate_assessment_offering_from_model(model)
@@ -150,8 +151,9 @@ def get_all_certificate_assessment_offerings() -> (
     Returns:
         list(CertificateAssessmentOffering). A list of all certificate offerings.
     """
-    offering_models = (
-        certificate_models.CertificateAssessmentOfferingModel.get_all().fetch()
+    offering_models = cast(
+        List[certificate_models.CertificateAssessmentOfferingModel],
+        certificate_models.CertificateAssessmentOfferingModel.get_all().fetch(),
     )
     return [
         _get_certificate_assessment_offering_from_model(model)

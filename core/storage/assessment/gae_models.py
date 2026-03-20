@@ -21,7 +21,8 @@ from __future__ import annotations
 from core import utils
 from core.platform import models
 
-from typing import Dict, Optional
+import datetime
+from typing import Dict, List, Optional, cast
 
 MYPY = False
 if MYPY:  # pragma: no cover
@@ -118,7 +119,11 @@ class AssessmentAttemptModel(base_models.BaseModel):
             dict. The exported data.
         """
         user_data = {}
-        for attempt_model in cls.query(cls.user_id == user_id).fetch():
+        attempt_models = cast(
+            List[AssessmentAttemptModel],
+            cls.query(cls.user_id == user_id).fetch(),
+        )
+        for attempt_model in attempt_models:
             user_data[attempt_model.id] = {
                 'offering_id': attempt_model.offering_id,
                 'offering_version': str(attempt_model.offering_version),
@@ -150,7 +155,7 @@ class AssessmentAttemptModel(base_models.BaseModel):
         user_id: str,
         offering_id: str,
         offering_version: int,
-        start_time,
+        start_time: datetime.datetime,
     ) -> AssessmentAttemptModel:
         """Creates a new AssessmentAttemptModel entry."""
         if cls.get_by_id(attempt_id):
@@ -239,7 +244,11 @@ class AssessmentQuestionResponseModel(base_models.BaseModel):
     def export_data(cls, user_id: str) -> Dict[str, Dict[str, str]]:
         """Exports the user data."""
         user_data = {}
-        for response_model in cls.query(cls.user_id == user_id).fetch():
+        response_models = cast(
+            List[AssessmentQuestionResponseModel],
+            cls.query(cls.user_id == user_id).fetch(),
+        )
+        for response_model in response_models:
             user_data[response_model.id] = {
                 'attempt_id': response_model.attempt_id,
                 'question_id': response_model.question_id,
@@ -318,7 +327,7 @@ class CertificateMasteryStatsModel(base_models.BaseModel):
         base_models.MODEL_ASSOCIATION_TO_USER
     ):
         """Model does not contain user data."""
-        return base_models.MODEL_ASSOCIATION_TO_USER.NOT_APPLICABLE
+        return base_models.MODEL_ASSOCIATION_TO_USER.NOT_CORRESPONDING_TO_USER
 
     @classmethod
     def get_export_policy(cls) -> Dict[str, base_models.EXPORT_POLICY]:

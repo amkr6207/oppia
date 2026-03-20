@@ -48,7 +48,9 @@ class CertificateOfferingHandler(
     @acl_decorators.can_access_topics_and_skills_dashboard
     def get(self) -> None:
         """Handles GET requests to fetch certificate offerings."""
+        assert self.normalized_request is not None
         offering_id = self.normalized_request.get('offering_id')
+        assert offering_id is not None
         offering = (
             certificate_services.get_certificate_assessment_offering_by_id(
                 offering_id, strict=False
@@ -62,6 +64,7 @@ class CertificateOfferingHandler(
     @acl_decorators.can_access_topics_and_skills_dashboard
     def post(self) -> None:
         """Handles POST requests to create a new certificate offering."""
+        assert self.normalized_payload is not None
         offering_id = self.normalized_payload.get('offering_id')
         name = self.normalized_payload.get('name')
         description = self.normalized_payload.get('description')
@@ -70,6 +73,13 @@ class CertificateOfferingHandler(
         time_limit_in_minutes = self.normalized_payload.get(
             'time_limit_in_minutes'
         )
+
+        assert isinstance(offering_id, str)
+        assert isinstance(name, str)
+        assert isinstance(description, str)
+        assert isinstance(classroom_id, str)
+        assert isinstance(attached_skill_ids, list)
+        assert isinstance(time_limit_in_minutes, int)
 
         offering = certificate_domain.CertificateAssessmentOffering(
             offering_id,

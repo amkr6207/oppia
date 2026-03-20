@@ -43,7 +43,9 @@ class AssessmentAttemptHandler(
     @acl_decorators.can_access_learner_dashboard
     def post(self) -> None:
         """Handles POST requests to start an assessment attempt."""
+        assert self.normalized_payload is not None
         offering_id = self.normalized_payload.get('offering_id')
+        assert offering_id is not None
 
         # Verify that the offering exists.
         offering = (
@@ -52,8 +54,9 @@ class AssessmentAttemptHandler(
             )
         )
         if not offering:
-            raise self.PageNotFoundException('Certificate offering not found.')
+            raise base.UserFacingExceptions.NotFoundException()
 
+        assert self.user_id is not None
         attempt = assessment_services.start_assessment_attempt(
             self.user_id, offering_id
         )
@@ -107,12 +110,23 @@ class AssessmentSubmitHandler(base.BaseHandler[Dict[str, str], Dict[str, str]]):
     @acl_decorators.can_access_learner_dashboard
     def post(self) -> None:
         """Handles POST requests to submit an assessment attempt."""
+        assert self.normalized_payload is not None
         attempt_id = self.normalized_payload.get('attempt_id')
         responses_dicts = self.normalized_payload.get('responses')
+        assert attempt_id is not None
+        assert isinstance(responses_dicts, list)
 
         domain_responses = []
         for rd in responses_dicts:
             # Ensure that all properties exist according to domain object.
+            assert isinstance(rd['id'], str)
+            assert isinstance(rd['question_id'], str)
+            assert isinstance(rd['question_version'], int)
+            assert isinstance(rd['skill_id'], str)
+            assert isinstance(rd['skill_version'], int)
+            assert isinstance(rd['learner_answer_html'], (str, type(None)))
+            assert isinstance(rd['is_correct'], bool)
+
             resp = assessment_domain.AssessmentQuestionResponse(
                 response_id=rd['id'],
                 attempt_id=attempt_id,
@@ -145,6 +159,7 @@ class LearnerCertificatesHandler(
     @acl_decorators.can_access_learner_dashboard
     def get(self) -> None:
         """Handles GET requests to fetch earned certificates."""
+        assert self.user_id is not None
         # The following service method returns successful attempts.
         certificates = assessment_services.get_earned_certificates(self.user_id)
 

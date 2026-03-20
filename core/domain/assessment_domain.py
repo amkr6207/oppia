@@ -36,7 +36,8 @@ class AssessmentAttemptDict(TypedDict):
     start_time: float
     end_time: Optional[float]
     score_percentage: Optional[float]
-    passed: bool
+    passed: Optional[bool]
+    offering_name: Optional[str]
 
 
 class AssessmentAttempt:

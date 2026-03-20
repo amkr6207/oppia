@@ -19,7 +19,7 @@
   </div>
   <div class="form-group">
     <label>Skills to Assess</label>
-    <div class="skills-list" style="max-height: 200px; overflow-y: auto; border: 1px solid #ccc; padding: 10px;">
+    <div class="skills-list">
       <div *ngFor="let skill of allSkills" class="checkbox">
         <label>
           <input type="checkbox" [checked]="selectedSkillIds.indexOf(skill.id) !== -1" (change)="toggleSkill(skill.id)" class="e2e-test-certificate-skill-checkbox">
@@ -37,3 +37,12 @@
   <button class="btn btn-secondary" (click)="cancel()">Cancel</button>
   <button class="btn btn-success e2e-test-confirm-certificate-creation-button" (click)="save()" [disabled]="!isValid()">Create</button>
 </div>
+
+<style>
+  .skills-list {
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: auto;
+    padding: 10px;
+  }
+</style>
